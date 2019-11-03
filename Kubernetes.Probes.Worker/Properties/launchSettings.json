@@ -1,0 +1,17 @@
+{
+  "profiles": {
+    "Kubernetes.Probes.Worker": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ResponseQueueConnection": "Endpoint=sb://skraperprodsb.servicebus.windows.net/;SharedAccessKeyName=SubscriberSend;SharedAccessKey=dTNcPj565hsSxw4xMcRZtRcYc0FPl6J+ZTPrS+/nWwE=;EntityPath=demo-response-queue",
+        "ResponseQueueName": "demo-response-queue",
+        "RequestQueueName": "demo-request-queue",
+        "LogLevel": "0",
+        "RequestQueueConnection": "Endpoint=sb://skraperprodsb.servicebus.windows.net/;SharedAccessKeyName=SubscriberListen;SharedAccessKey=toHBCvE7EaXHRLKYClkPNgxQszx+IEV1gGR2jCGds2s=;EntityPath=demo-request-queue"
+      }
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}

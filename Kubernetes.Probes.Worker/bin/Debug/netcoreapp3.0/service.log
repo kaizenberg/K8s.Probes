@@ -1,0 +1,39 @@
+2019-11-04 00:42:57.8691|DEBUG|Microsoft.Extensions.Hosting.Internal.Host|Hosting starting
+2019-11-04 00:43:00.2232|FATAL|Kubernetes.Probes.Worker.Program|Stopped program because of exception
+2019-11-04 00:43:48.9240|DEBUG|Microsoft.Extensions.Hosting.Internal.Host|Hosting starting
+2019-11-04 00:43:49.0936|FATAL|Kubernetes.Probes.Worker.Program|Stopped program because of exception
+2019-11-04 00:46:23.0516|FATAL|Kubernetes.Probes.Worker.Program|Stopped program because of exception
+2019-11-04 00:51:52.4400|FATAL|Kubernetes.Probes.Worker.Program|Stopped program because of exception
+2019-11-04 01:16:05.6848|FATAL|Kubernetes.Probes.Worker.Program|Stopped program because of exception
+2019-11-04 01:17:07.9893|FATAL|Kubernetes.Probes.Worker.Program|Stopped program because of exception
+2019-11-04 01:23:55.3684|FATAL|Kubernetes.Probes.Worker.Program|Stopped program because of exception
+2019-11-04 01:25:53.2155|FATAL|Kubernetes.Probes.Worker.Program|Stopped program because of exception
+2019-11-04 01:38:19.6526|FATAL|Kubernetes.Probes.Worker.Program|Stopped program because of exception
+2019-11-04 01:46:04.0433|FATAL|Kubernetes.Probes.Worker.Program|Stopped program because of exception
+2019-11-04 01:48:31.1001|FATAL|Kubernetes.Probes.Worker.Program|Stopped program because of exception
+2019-11-04 02:07:05.1026|FATAL|Kubernetes.Probes.Worker.Program|Stopped program because of exception
+2019-11-04 02:13:13.0023|FATAL|Kubernetes.Probes.Worker.Program|Stopped program because of exception
+2019-11-04 02:13:52.3508|FATAL|Kubernetes.Probes.Worker.Program|Stopped program because of exception
+2019-11-04 02:14:30.9394|FATAL|Kubernetes.Probes.Worker.Program|Stopped program because of exception
+2019-11-04 02:15:29.0176|FATAL|Kubernetes.Probes.Worker.Program|Stopped program because of exception
+2019-11-04 02:15:54.8496|FATAL|Kubernetes.Probes.Worker.Program|Stopped program because of exception
+2019-11-04 02:16:30.4395|INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down.
+2019-11-04 02:16:30.5323|INFO|Microsoft.Hosting.Lifetime|Hosting environment: Production
+2019-11-04 02:16:30.5323|INFO|Microsoft.Hosting.Lifetime|Content root path: D:\GitHub\Public\Kubernetes\Probes\Kubernetes.Probes.Worker\bin\Debug\netcoreapp3.0\
+2019-11-04 02:16:50.5076|INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down.
+2019-11-04 02:16:50.5500|INFO|Microsoft.Hosting.Lifetime|Hosting environment: Production
+2019-11-04 02:16:50.5500|INFO|Microsoft.Hosting.Lifetime|Content root path: D:\GitHub\Public\Kubernetes\Probes\Kubernetes.Probes.Worker\bin\Debug\netcoreapp3.0\
+2019-11-04 02:17:10.7888|FATAL|Kubernetes.Probes.Worker.Program|Stopped program because of exception
+2019-11-04 02:20:56.9705|FATAL|Kubernetes.Probes.Worker.Program|Stopped program because of exception
+2019-11-04 02:22:23.8912|FATAL|Kubernetes.Probes.Worker.Program|Stopped program because of exception
+2019-11-04 02:33:18.8705|FATAL|Kubernetes.Probes.Worker.Program|Stopped program because of exception
+2019-11-04 02:41:42.8294|FATAL|Kubernetes.Probes.Worker.Program|Stopped program because of exception
+2019-11-04 02:43:30.7118|FATAL|Kubernetes.Probes.Worker.Program|Stopped program because of exception
+2019-11-04 02:44:36.7598|FATAL|Kubernetes.Probes.Worker.Program|Stopped program because of exception
+2019-11-04 03:00:34.6851|FATAL|Kubernetes.Probes.Worker.Program|Stopped program because of exception
+2019-11-04 03:02:14.7357|FATAL|Kubernetes.Probes.Worker.Program|Stopped program because of exception
+2019-11-04 03:02:58.0086|INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down.
+2019-11-04 03:02:58.1311|INFO|Microsoft.Hosting.Lifetime|Hosting environment: Production
+2019-11-04 03:02:58.1311|INFO|Microsoft.Hosting.Lifetime|Content root path: D:\GitHub\Public\Kubernetes\Probes\Kubernetes.Probes.Worker\bin\Debug\netcoreapp3.0\
+2019-11-04 03:05:57.3699|FATAL|Kubernetes.Probes.Worker.Program|Stopped program because of exception
+2019-11-04 03:08:15.3846|FATAL|Kubernetes.Probes.Worker.Program|Stopped program because of exception

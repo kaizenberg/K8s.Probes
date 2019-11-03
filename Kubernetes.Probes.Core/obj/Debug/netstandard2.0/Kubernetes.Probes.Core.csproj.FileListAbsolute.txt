@@ -1,0 +1,3 @@
+D:\GitHub\Public\Kubernetes\Probes\Kubernetes.Probes.Core\obj\Debug\netstandard2.0\Kubernetes.Probes.Core.csprojAssemblyReference.cache
+D:\GitHub\Public\Kubernetes\Probes\Kubernetes.Probes.Core\obj\Debug\netstandard2.0\Kubernetes.Probes.Core.AssemblyInfoInputs.cache
+D:\GitHub\Public\Kubernetes\Probes\Kubernetes.Probes.Core\obj\Debug\netstandard2.0\Kubernetes.Probes.Core.AssemblyInfo.cs
