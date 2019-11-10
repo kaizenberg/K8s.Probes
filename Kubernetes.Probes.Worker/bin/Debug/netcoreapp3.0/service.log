@@ -37,3 +37,30 @@
 2019-11-04 03:02:58.1311|INFO|Microsoft.Hosting.Lifetime|Content root path: D:\GitHub\Public\Kubernetes\Probes\Kubernetes.Probes.Worker\bin\Debug\netcoreapp3.0\
 2019-11-04 03:05:57.3699|FATAL|Kubernetes.Probes.Worker.Program|Stopped program because of exception
 2019-11-04 03:08:15.3846|FATAL|Kubernetes.Probes.Worker.Program|Stopped program because of exception
+2019-11-04 22:38:39.8197|INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down.
+2019-11-04 22:38:40.0880|INFO|Microsoft.Hosting.Lifetime|Hosting environment: Production
+2019-11-04 22:38:40.1159|INFO|Microsoft.Hosting.Lifetime|Content root path: D:\GitHub\Public\K8s.Probes\Kubernetes.Probes.Worker\bin\Debug\netcoreapp3.0\
+2019-11-04 22:38:42.9780|INFO|Kubernetes.Probes.Core.ServiceWrapper|Couldn't send ready signal: Microsoft.Azure.ServiceBus.UnauthorizedException: Manage,EntityRead claims required for this operation. TrackingId:569794aa-e7d0-4044-9ee5-b53c1ac15522_G8, SystemTracker:skraperprodsb.servicebus.windows.net:demo-request-queue, Timestamp:2019-11-04T17:08:41
+   at Microsoft.Azure.ServiceBus.Management.ManagementClient.SendHttpRequest(HttpRequestMessage request, CancellationToken cancellationToken)
+   at Microsoft.Azure.ServiceBus.Management.ManagementClient.GetEntity(String path, String query, Boolean enrich, CancellationToken cancellationToken)
+   at Microsoft.Azure.ServiceBus.Management.ManagementClient.GetQueueAsync(String queuePath, CancellationToken cancellationToken)
+   at Microsoft.Azure.ServiceBus.Management.ManagementClient.QueueExistsAsync(String queuePath, CancellationToken cancellationToken)
+   at Kubernetes.Probes.Worker.QueueDependency.CheckAsync(CancellationToken token) in D:\GitHub\Public\K8s.Probes\Kubernetes.Probes.Worker\QueueDependency.cs:line 26
+   at Kubernetes.Probes.Core.ServiceWrapper.<>c__DisplayClass6_0.<<SendReadinessAsync>b__0>d.MoveNext() in D:\GitHub\Public\K8s.Probes\Kubernetes.Probes.Core\ServiceWrapper.cs:line 53
+--- End of stack trace from previous location where exception was thrown ---
+   at Polly.AsyncPolicy.<>c__DisplayClass40_0.<<ImplementationAsync>b__0>d.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at Polly.Retry.AsyncRetryEngine.ImplementationAsync[TResult](Func`3 action, Context context, CancellationToken cancellationToken, ExceptionPredicates shouldRetryExceptionPredicates, ResultPredicates`1 shouldRetryResultPredicates, Func`5 onRetryAsync, Int32 permittedRetryCount, IEnumerable`1 sleepDurationsEnumerable, Func`4 sleepDurationProvider, Boolean continueOnCapturedContext)
+2019-11-11 04:38:02.2902|INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down.
+2019-11-11 04:38:02.3819|INFO|Microsoft.Hosting.Lifetime|Hosting environment: Production
+2019-11-11 04:38:02.3819|INFO|Microsoft.Hosting.Lifetime|Content root path: D:\GitHub\Public\K8s.Probes\Kubernetes.Probes.Worker\bin\Debug\netcoreapp3.0\
+2019-11-11 04:41:38.7139|INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down.
+2019-11-11 04:41:38.7752|INFO|Microsoft.Hosting.Lifetime|Hosting environment: Production
+2019-11-11 04:41:38.7827|INFO|Microsoft.Hosting.Lifetime|Content root path: D:\GitHub\Public\K8s.Probes\Kubernetes.Probes.Worker\bin\Debug\netcoreapp3.0\
+2019-11-11 04:42:21.7722|INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down.
+2019-11-11 04:42:21.9093|INFO|Microsoft.Hosting.Lifetime|Hosting environment: Production
+2019-11-11 04:42:21.9093|INFO|Microsoft.Hosting.Lifetime|Content root path: D:\GitHub\Public\K8s.Probes\Kubernetes.Probes.Worker\bin\Debug\netcoreapp3.0\
+2019-11-11 04:42:34.7352|INFO|Kubernetes.Probes.Worker.ServiceImplementation|Worker running at: 11/11/2019 04:42:34 +05:30
+2019-11-11 04:44:43.6717|INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down.
+2019-11-11 04:44:43.7402|INFO|Microsoft.Hosting.Lifetime|Hosting environment: Production
+2019-11-11 04:44:43.7402|INFO|Microsoft.Hosting.Lifetime|Content root path: D:\GitHub\Public\K8s.Probes\Kubernetes.Probes.Worker\bin\Debug\netcoreapp3.0\

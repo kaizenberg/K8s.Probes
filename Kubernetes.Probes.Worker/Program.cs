@@ -8,7 +8,6 @@ using Microsoft.Extensions.Options;
 using NLog;
 using NLog.Extensions.Hosting;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Kubernetes.Probes.Worker
@@ -33,10 +32,16 @@ namespace Kubernetes.Probes.Worker
 
                         registry.Configure<AppConfig>(option =>
                         {
-                            option.RequestQueueConnection = Environment.GetEnvironmentVariable("RequestQueueConnection");
-                            option.ResponseQueueConnection = Environment.GetEnvironmentVariable("ResponseQueueConnection");
-                            option.RequestQueueName = Environment.GetEnvironmentVariable("RequestQueueName");
-                            option.ResponseQueueName = Environment.GetEnvironmentVariable("ResponseQueueName");
+                            option.RequestQueueConnectionString = Environment.GetEnvironmentVariable("RequestQueueConnectionString");
+                            option.ResponseQueueConnectionString = Environment.GetEnvironmentVariable("ResponseQueueConnectionString");
+                            option.RequestQueue = Environment.GetEnvironmentVariable("RequestQueue");
+                            option.ResponseQueue = Environment.GetEnvironmentVariable("ResponseQueue");
+                            option.ClientId = Environment.GetEnvironmentVariable("ClientId");
+                            option.ClientSecret = Environment.GetEnvironmentVariable("ClientSecret");
+                            option.SubscriptionId = Environment.GetEnvironmentVariable("SubscriptionId");
+                            option.TenantId = Environment.GetEnvironmentVariable("TenantId");
+                            option.ServiceBusNamespace = Environment.GetEnvironmentVariable("ServiceBusNamespace");
+                            option.ResourceGroup = Environment.GetEnvironmentVariable("ResourceGroup");
 
                             short.TryParse(Environment.GetEnvironmentVariable("LogLevel"),
                                 out short logLevel);
@@ -61,15 +66,13 @@ namespace Kubernetes.Probes.Worker
 
                         registry.For<IServiceDependency>()
                         .Use<QueueDependency>()
-                        .Ctor<string>("queueConnectionString").Is(qConfig.RequestQueueConnection)
-                        .Ctor<string>("queueName").Is(qConfig.RequestQueueName)
-                        .Named(qConfig.RequestQueueName);
+                        .Ctor<string>("queueName").Is(qConfig.RequestQueue)
+                        .Named(qConfig.RequestQueue);
 
                         registry.For<IServiceDependency>()
                         .Use<QueueDependency>()
-                        .Ctor<string>("queueConnectionString").Is(qConfig.ResponseQueueConnection)
-                        .Ctor<string>("queueName").Is(qConfig.ResponseQueueName)
-                        .Named(qConfig.ResponseQueueName);
+                        .Ctor<string>("queueName").Is(qConfig.ResponseQueue)
+                        .Named(qConfig.ResponseQueue);
 
                         registry.For<IDependencyFactory>().Use<DependencyFactory>();
 

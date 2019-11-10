@@ -17,5 +17,10 @@ namespace Kubernetes.Probes.Core
         {
             return _context.GetAllInstances<T>().ToList();
         }
+
+        public T GetInstanceByName<T>(string name)
+        {
+            return _context.TryGetInstance<T>(name);
+        }
     }
 }

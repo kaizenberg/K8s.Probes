@@ -17,7 +17,8 @@ namespace Kubernetes.Probes.Core
         private readonly ILogger<ServiceWrapper> _logger;
         private readonly IServiceImplementation _service;
 
-        public ServiceWrapper(IDependencyFactory dependencyFacotry,
+        public ServiceWrapper(
+            IDependencyFactory dependencyFacotry,
             ILogger<ServiceWrapper> logger,
             IServiceImplementation service)
         {

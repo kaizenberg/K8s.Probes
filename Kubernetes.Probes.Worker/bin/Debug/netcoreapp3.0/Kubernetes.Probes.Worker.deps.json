@@ -11,13 +11,14 @@
           "Kubernetes.Probes.Core": "1.0.0",
           "Lamar": "4.0.0",
           "Lamar.Microsoft.DependencyInjection": "4.0.2",
-          "Microsoft.Azure.ServiceBus": "4.1.0",
+          "Microsoft.AspNet.WebApi.Client": "5.2.7",
+          "Microsoft.Azure.ServiceBus": "4.1.1",
           "Microsoft.Extensions.Configuration.Json": "3.0.0",
           "Microsoft.Extensions.DependencyInjection": "3.0.0",
           "Microsoft.Extensions.Hosting": "3.0.0",
           "Microsoft.Extensions.Options.ConfigurationExtensions": "3.0.0",
           "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": "1.9.5",
-          "NLog": "4.6.7",
+          "NLog": "4.6.8",
           "NLog.Extensions.Hosting": "1.6.1",
           "NLog.Extensions.Logging": "1.6.1",
           "Polly": "7.1.1"
@@ -77,6 +78,18 @@
           }
         }
       },
+      "Microsoft.AspNet.WebApi.Client/5.2.7": {
+        "dependencies": {
+          "Newtonsoft.Json": "10.0.3",
+          "Newtonsoft.Json.Bson": "1.0.1"
+        },
+        "runtime": {
+          "lib/netstandard2.0/System.Net.Http.Formatting.dll": {
+            "assemblyVersion": "5.2.7.0",
+            "fileVersion": "5.2.61128.0"
+          }
+        }
+      },
       "Microsoft.Azure.Amqp/2.4.2": {
         "dependencies": {
           "System.Net.WebSockets.Client": "4.0.2",
@@ -89,7 +102,7 @@
           }
         }
       },
-      "Microsoft.Azure.ServiceBus/4.1.0": {
+      "Microsoft.Azure.ServiceBus/4.1.1": {
         "dependencies": {
           "Microsoft.Azure.Amqp": "2.4.2",
           "Microsoft.Azure.Services.AppAuthentication": "1.0.3",
@@ -99,8 +112,8 @@
         },
         "runtime": {
           "lib/netstandard2.0/Microsoft.Azure.ServiceBus.dll": {
-            "assemblyVersion": "4.1.0.0",
-            "fileVersion": "4.100.19.51802"
+            "assemblyVersion": "4.1.1.0",
+            "fileVersion": "4.100.119.55803"
           }
         }
       },
@@ -576,11 +589,23 @@
           }
         }
       },
-      "NLog/4.6.7": {
+      "Newtonsoft.Json.Bson/1.0.1": {
+        "dependencies": {
+          "NETStandard.Library": "1.6.1",
+          "Newtonsoft.Json": "10.0.3"
+        },
+        "runtime": {
+          "lib/netstandard1.3/Newtonsoft.Json.Bson.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.1.20722"
+          }
+        }
+      },
+      "NLog/4.6.8": {
         "runtime": {
           "lib/netstandard2.0/NLog.dll": {
             "assemblyVersion": "4.0.0.0",
-            "fileVersion": "4.6.7.10445"
+            "fileVersion": "4.6.8.10751"
           }
         }
       },
@@ -599,7 +624,7 @@
       "NLog.Extensions.Logging/1.6.1": {
         "dependencies": {
           "Microsoft.Extensions.Logging": "3.0.0",
-          "NLog": "4.6.7"
+          "NLog": "4.6.8"
         },
         "runtime": {
           "lib/netcoreapp3.0/NLog.Extensions.Logging.dll": {
@@ -1562,6 +1587,13 @@
       "path": "lamarcodegeneration/1.2.0",
       "hashPath": "lamarcodegeneration.1.2.0.nupkg.sha512"
     },
+    "Microsoft.AspNet.WebApi.Client/5.2.7": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-/76fAHknzvFqbznS6Uj2sOyE9rJB3PltY+f53TH8dX9RiGhk02EhuFCWljSj5nnqKaTsmma8DFR50OGyQ4yJ1g==",
+      "path": "microsoft.aspnet.webapi.client/5.2.7",
+      "hashPath": "microsoft.aspnet.webapi.client.5.2.7.nupkg.sha512"
+    },
     "Microsoft.Azure.Amqp/2.4.2": {
       "type": "package",
       "serviceable": true,
@@ -1569,12 +1601,12 @@
       "path": "microsoft.azure.amqp/2.4.2",
       "hashPath": "microsoft.azure.amqp.2.4.2.nupkg.sha512"
     },
-    "Microsoft.Azure.ServiceBus/4.1.0": {
+    "Microsoft.Azure.ServiceBus/4.1.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-EZ8sNFmeHLV4QOLPe9We8drN6q/15zoUNFmdY3sT3xR7jDlYyozQMGwySqBvOi38ykvIKItAaUgz8Dr8Dj1T2g==",
-      "path": "microsoft.azure.servicebus/4.1.0",
-      "hashPath": "microsoft.azure.servicebus.4.1.0.nupkg.sha512"
+      "sha512": "sha512-s5+/u/KBXHgEE0QWZ4aIXqp0USSyCleua2tEl804qsJYO6sjmDuTxhFODm2urfdQ+jeqQ3BUnuch0uTiW/XosA==",
+      "path": "microsoft.azure.servicebus/4.1.1",
+      "hashPath": "microsoft.azure.servicebus.4.1.1.nupkg.sha512"
     },
     "Microsoft.Azure.Services.AppAuthentication/1.0.3": {
       "type": "package",
@@ -1842,12 +1874,19 @@
       "path": "newtonsoft.json/10.0.3",
       "hashPath": "newtonsoft.json.10.0.3.nupkg.sha512"
     },
-    "NLog/4.6.7": {
+    "Newtonsoft.Json.Bson/1.0.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-xSIzXrIF89Ww6yoJPvyBcu4JLgNiDiEaTT4GyVltZEeVIvkgSm9J/srUy1Yz0EXwbTv502l8knoCFrgNc/MUMA==",
-      "path": "nlog/4.6.7",
-      "hashPath": "nlog.4.6.7.nupkg.sha512"
+      "sha512": "sha512-5PYT/IqQ+UK31AmZiSS102R6EsTo+LGTSI8bp7WAUqDKaF4wHXD8U9u4WxTI1vc64tYi++8p3dk3WWNqPFgldw==",
+      "path": "newtonsoft.json.bson/1.0.1",
+      "hashPath": "newtonsoft.json.bson.1.0.1.nupkg.sha512"
+    },
+    "NLog/4.6.8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-LKB0uN5naOTxdNz++iapk6arNYv2asE8FPRBAmQZ1fe8y8C1Zm6sldh/w9TP/w5s7FGK8s0x6ny0og5ytFK1oQ==",
+      "path": "nlog/4.6.8",
+      "hashPath": "nlog.4.6.8.nupkg.sha512"
     },
     "NLog.Extensions.Hosting/1.6.1": {
       "type": "package",

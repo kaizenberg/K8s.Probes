@@ -3,11 +3,17 @@
     "Kubernetes.Probes.Worker": {
       "commandName": "Project",
       "environmentVariables": {
-        "ResponseQueueConnection": "Endpoint=sb://skraperprodsb.servicebus.windows.net/;SharedAccessKeyName=SubscriberSend;SharedAccessKey=dTNcPj565hsSxw4xMcRZtRcYc0FPl6J+ZTPrS+/nWwE=;EntityPath=demo-response-queue",
-        "ResponseQueueName": "demo-response-queue",
-        "RequestQueueName": "demo-request-queue",
+        "ResourceGroup": "skraper-prod-in",
+        "RequestQueue": "demo-request-queue",
+        "ClientSecret": "/9WD@1j@tUPhy3bowc4qSqwHgP_.=YXw",
+        "RequestQueueConnectionString": "Endpoint=sb://skraperprodsb.servicebus.windows.net/;SharedAccessKeyName=SkraperManageQueue;SharedAccessKey=vJJFOiYFb++b5z0287PYHfC3HLvVCg4aq0agQUvPpRE=",
+        "ServiceBusNamespace": "skraperprodsb",
+        "ClientId": "c2712c1f-d85f-4e9d-babd-92b5803ca08c",
         "LogLevel": "0",
-        "RequestQueueConnection": "Endpoint=sb://skraperprodsb.servicebus.windows.net/;SharedAccessKeyName=SubscriberListen;SharedAccessKey=toHBCvE7EaXHRLKYClkPNgxQszx+IEV1gGR2jCGds2s=;EntityPath=demo-request-queue"
+        "TenantId": "3994dd20-578c-4843-a1a7-31f9d510b870",
+        "SubscriptionId": "c58cdf5a-f536-4596-8bee-9c9fdedea321",
+        "ResponseQueueConnectionString": "Endpoint=sb://skraperprodsb.servicebus.windows.net/;SharedAccessKeyName=SubscriberSend;SharedAccessKey=dTNcPj565hsSxw4xMcRZtRcYc0FPl6J+ZTPrS+/nWwE=",
+        "ResponseQueue": "demo-response-queue"
       }
     },
     "Docker": {

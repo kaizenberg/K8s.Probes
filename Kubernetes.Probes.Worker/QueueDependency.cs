@@ -1,5 +1,8 @@
 ﻿using Kubernetes.Probes.Core;
-using Microsoft.Azure.ServiceBus.Management;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using System;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -7,20 +10,41 @@ namespace Kubernetes.Probes.Worker
 {
     internal class QueueDependency : IServiceDependency
     {
-        private readonly string _queueConnectionString;
         private readonly string _queueName;
+        private readonly AppConfig _config;
+        private readonly ILogger<QueueDependency> _logger;
 
-        public QueueDependency(string queueConnectionString, string queueName)
+        public QueueDependency(
+            string queueName,
+            IOptions<AppConfig> config,
+            ILogger<QueueDependency> logger)
         {
-            _queueConnectionString = queueConnectionString;
             _queueName = queueName;
+            _config = config.Value;
+            _logger = logger;
         }
 
-        public async Task<bool> CheckAsync(CancellationToken token)
+        public async Task<bool> CheckAsync(CancellationToken ct)
         {
-            var nsManager = new ManagementClient(_queueConnectionString);
+            Console.WriteLine($"Probing dependency: Service Bus Queue - {_queueName}");
 
-            return await nsManager.QueueExistsAsync(_queueName).ConfigureAwait(false);
+            var result = false;
+            var token = await AuthenticationHelper.AcquireTokenByServicePrincipal(_config.TenantId, _config.ClientId, _config.ClientSecret);
+
+            using (var client = new HttpClient())
+            {
+                client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+                client.BaseAddress = new Uri("https://management.azure.com/");
+
+                var url = $"/subscriptions/{_config.SubscriptionId}/resourceGroups/{_config.ResourceGroup}/providers/Microsoft.ServiceBus/namespaces/{_config.ServiceBusNamespace}/queues/{_queueName}?api-version=2017-04-01";
+
+                using (var response = await client.GetAsync(url))
+                {
+                    result = response.IsSuccessStatusCode;
+                }
+            }
+
+            return result;
         }
     }
 }

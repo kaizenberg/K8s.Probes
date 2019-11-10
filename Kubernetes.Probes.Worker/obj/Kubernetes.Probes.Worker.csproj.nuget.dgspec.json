@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\GitHub\\Public\\Kubernetes\\Probes\\Kubernetes.Probes.Worker\\Kubernetes.Probes.Worker.csproj": {}
+    "D:\\GitHub\\Public\\K8s.Probes\\Kubernetes.Probes.Worker\\Kubernetes.Probes.Worker.csproj": {}
   },
   "projects": {
-    "D:\\GitHub\\Public\\Kubernetes\\Probes\\Kubernetes.Probes.Core\\Kubernetes.Probes.Core.csproj": {
+    "D:\\GitHub\\Public\\K8s.Probes\\Kubernetes.Probes.Core\\Kubernetes.Probes.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\GitHub\\Public\\Kubernetes\\Probes\\Kubernetes.Probes.Core\\Kubernetes.Probes.Core.csproj",
+        "projectUniqueName": "D:\\GitHub\\Public\\K8s.Probes\\Kubernetes.Probes.Core\\Kubernetes.Probes.Core.csproj",
         "projectName": "Kubernetes.Probes.Core",
-        "projectPath": "D:\\GitHub\\Public\\Kubernetes\\Probes\\Kubernetes.Probes.Core\\Kubernetes.Probes.Core.csproj",
+        "projectPath": "D:\\GitHub\\Public\\K8s.Probes\\Kubernetes.Probes.Core\\Kubernetes.Probes.Core.csproj",
         "packagesPath": "C:\\Users\\pravi\\.nuget\\packages\\",
-        "outputPath": "D:\\GitHub\\Public\\Kubernetes\\Probes\\Kubernetes.Probes.Core\\obj\\",
+        "outputPath": "D:\\GitHub\\Public\\K8s.Probes\\Kubernetes.Probes.Core\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\pravi\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -74,14 +74,14 @@
         }
       }
     },
-    "D:\\GitHub\\Public\\Kubernetes\\Probes\\Kubernetes.Probes.Worker\\Kubernetes.Probes.Worker.csproj": {
+    "D:\\GitHub\\Public\\K8s.Probes\\Kubernetes.Probes.Worker\\Kubernetes.Probes.Worker.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\GitHub\\Public\\Kubernetes\\Probes\\Kubernetes.Probes.Worker\\Kubernetes.Probes.Worker.csproj",
+        "projectUniqueName": "D:\\GitHub\\Public\\K8s.Probes\\Kubernetes.Probes.Worker\\Kubernetes.Probes.Worker.csproj",
         "projectName": "Kubernetes.Probes.Worker",
-        "projectPath": "D:\\GitHub\\Public\\Kubernetes\\Probes\\Kubernetes.Probes.Worker\\Kubernetes.Probes.Worker.csproj",
+        "projectPath": "D:\\GitHub\\Public\\K8s.Probes\\Kubernetes.Probes.Worker\\Kubernetes.Probes.Worker.csproj",
         "packagesPath": "C:\\Users\\pravi\\.nuget\\packages\\",
-        "outputPath": "D:\\GitHub\\Public\\Kubernetes\\Probes\\Kubernetes.Probes.Worker\\obj\\",
+        "outputPath": "D:\\GitHub\\Public\\K8s.Probes\\Kubernetes.Probes.Worker\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\pravi\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -97,8 +97,8 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "D:\\GitHub\\Public\\Kubernetes\\Probes\\Kubernetes.Probes.Core\\Kubernetes.Probes.Core.csproj": {
-                "projectPath": "D:\\GitHub\\Public\\Kubernetes\\Probes\\Kubernetes.Probes.Core\\Kubernetes.Probes.Core.csproj"
+              "D:\\GitHub\\Public\\K8s.Probes\\Kubernetes.Probes.Core\\Kubernetes.Probes.Core.csproj": {
+                "projectPath": "D:\\GitHub\\Public\\K8s.Probes\\Kubernetes.Probes.Core\\Kubernetes.Probes.Core.csproj"
               }
             }
           }
@@ -120,9 +120,13 @@
               "target": "Package",
               "version": "[4.0.2, )"
             },
+            "Microsoft.AspNet.WebApi.Client": {
+              "target": "Package",
+              "version": "[5.2.7, )"
+            },
             "Microsoft.Azure.ServiceBus": {
               "target": "Package",
-              "version": "[4.1.0, )"
+              "version": "[4.1.1, )"
             },
             "Microsoft.Extensions.Configuration.Json": {
               "target": "Package",
@@ -146,7 +150,7 @@
             },
             "NLog": {
               "target": "Package",
-              "version": "[4.6.7, )"
+              "version": "[4.6.8, )"
             },
             "NLog.Extensions.Hosting": {
               "target": "Package",
