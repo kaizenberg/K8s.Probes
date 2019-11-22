@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
       - name: k8s-probes-test
-        image: kaizenbergprodcr.azurecr.io/k8s-probes-test:1.0.0
+        image: xxxxxxxx.azurecr.io/k8s-probes-test:1.0.0
         env:
         - name: TenantId
           value: ""
