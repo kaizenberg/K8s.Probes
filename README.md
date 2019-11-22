@@ -2,7 +2,7 @@
 
 This sample code demonstrates how console or background service can easily achieve self-healing capability if it is containerized and hosted in Kubernetes cluster.
 
-For demostration;
+<h2>Usecase</h2>
 
 - Cross-platform .Net Core 3.0 application building framework is used to develop a worker service that runs continuously and processes some long running jobs that it picks up by itself.
 - App is containerized using Docker Linux VM
@@ -20,35 +20,25 @@ Other 3rd party libraries used for demonstration are:
 - Lamar (IoC) 
 - NLog (Logging)
 
-Running the app?
+<h2>Running the app</h2>
 
 - Download & install Azure CLI
-
 - Open PowerShell
-
-- Login to Azure account from developer desktop
-az login
-
-- Install Kubernetes CLI
-az aks install-cli
-
-- Login to Azure Container Registry
-docker login <azurecontainerregistryname> -u <username> -p <password>
- 
-- Build Dockerfile of this project & tag it 
-docker build -f Dockerfile -t <azurecontainerregistryname>/k8s-probes-test:1.0.0 .
-  
-- Push the image to Azure Container Registry
-docker push <azurecontainerregistryname>/k8s-probes-test:1.0.0
-  
-- Login to the cluster inside Azure Kubernetes Service
-az aks get-credentials --resource-group skraper-prod-in --name skraperprodks
-
-- Deploy Probes.yaml to the cluster
-kubectl apply -f Probes.yaml --record
-
-- View all pods that are created and running
-kubect get pods
-
-- View output of one of the pod
-kubectl logs -f <id of a pod>
+- Login to Azure account from developer desktop</br>
+<code> az login </code>
+- Install Kubernetes CLI</br>
+<code >az aks install-cli </code>
+- Login to Azure Container Registry</br>
+<code> docker login <azurecontainerregistryname> -u <username> -p <password ></code>
+- Build Dockerfile of this project & tag it</br>
+<code> docker build -f Dockerfile -t <azurecontainerregistryname>/k8s-probes-test:1.0.0 . </code>
+- Push the image to ACR</br>
+<code> docker push <azurecontainerregistryname>/k8s-probes-test:1.0.0 </code>
+- Login to Azure Kubernetes Service cluster</br>
+<code> az aks get-credentials --resource-group <resourcegroupofakscluster> --name <aksclustername> </code>
+- Deploy Probes.yaml to AKS cluster</br>
+<code> kubectl apply -f Probes.yaml --record </code>
+- View all pods that are created and running</br>
+<code> kubect get pods </code>
+- View output of one of the pod</br>
+<code> kubectl logs -f <id of a pod> </code>
