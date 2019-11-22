@@ -22,6 +22,7 @@ Other 3rd party libraries used for demonstration purpose are:
 
 <h2>Running the app</h2>
 
+- Clone the repository to developer desktop
 - Download & install Azure CLI
 - Open PowerShell
 - Login to Azure account from developer desktop</br>
@@ -30,6 +31,7 @@ Other 3rd party libraries used for demonstration purpose are:
 <code >az aks install-cli </code>
 - Login to Azure Container Registry</br>
 <code> docker login <azurecontainerregistryname> -u <username> -p <password ></code>
+- Navigate to the source code
 - Build Dockerfile of this project & tag it</br>
 <code> docker build -f Dockerfile -t <azurecontainerregistryname>/k8s-probes-test:1.0.0 . </code>
 - Push the image to ACR</br>
