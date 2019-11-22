@@ -19,3 +19,36 @@ Other 3rd party libraries used for demonstration are:
 - Polly (Retry Policy)
 - Lamar (IoC) 
 - NLog (Logging)
+
+Running the app?
+
+- Download & install Azure CLI
+
+- Open PowerShell
+
+- Login to Azure account from developer desktop
+az login
+
+- Install Kubernetes CLI
+az aks install-cli
+
+- Login to Azure Container Registry
+docker login <azurecontainerregistryname> -u <username> -p <password>
+ 
+- Build Dockerfile of this project & tag it 
+docker build -f Dockerfile -t <azurecontainerregistryname>/k8s-probes-test:1.0.0 .
+  
+- Push the image to Azure Container Registry
+docker push <azurecontainerregistryname>/k8s-probes-test:1.0.0
+  
+- Login to the cluster inside Azure Kubernetes Service
+az aks get-credentials --resource-group skraper-prod-in --name skraperprodks
+
+- Deploy Probes.yaml to the cluster
+kubectl apply -f Probes.yaml --record
+
+- View all pods that are created and running
+kubect get pods
+
+- View output of one of the pod
+kubectl logs -f <id of a pod>
