@@ -24,25 +24,25 @@ spec:
         image: kaizenbergprodcr.azurecr.io/k8s-probes-test:1.0.0
         env:
         - name: TenantId
-          value: "3994dd20-578c-4843-a1a7-31f9d510b870"
+          value: ""
         - name: SubscriptionId
-          value: "c58cdf5a-f536-4596-8bee-9c9fdedea321"
+          value: ""
         - name: ResourceGroup
-          value: "skraper-prod-in"
+          value: ""
         - name: ServiceBusNamespace
-          value: "skraperprodsb"
+          value: ""
         - name: RequestQueue
-          value: "demo-request-queue"
+          value: ""
         - name: ResponseQueue
-          value: "demo-response-queue"
+          value: ""
         - name: RequestQueueConnectionString
-          value: "Endpoint=sb://skraperprodsb.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=zsKLUWCODLPR54lOZqcjIsQ6RqPyDS91MClVULBkX+A="
+          value: ""
         - name: ResponseQueueConnectionString
-          value: "Endpoint=sb://skraperprodsb.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=zsKLUWCODLPR54lOZqcjIsQ6RqPyDS91MClVULBkX+A="
+          value: ""
         - name: ClientId
-          value: "c2712c1f-d85f-4e9d-babd-92b5803ca08c"
+          value: ""
         - name: ClientSecret
-          value: "/9WD@1j@tUPhy3bowc4qSqwHgP_.=YXw"
+          value: ""
         - name: AliveFileCreationIntervalSeconds
           value: "5"
         # After initialDelaySeconds check (within timeoutSeconds) if pods generated ready.txt file (successThreshold many times). If they did not then recheck every periodSeconds.
