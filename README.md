@@ -30,17 +30,17 @@ Other 3rd party libraries used for demonstration purpose are:
 - Install Kubernetes CLI</br>
 <code >az aks install-cli </code>
 - Login to Azure Container Registry</br>
-<code> docker login <azurecontainerregistryname> -u <username> -p <password ></code>
+<code> docker login azurecontainerregistryname -u username -p password </code>
 - Navigate to the source code
 - Build Dockerfile of this project & tag it</br>
-<code> docker build -f Dockerfile -t <azurecontainerregistryname>/k8s-probes-test:1.0.0 . </code>
+<code> docker build -f Dockerfile -t azurecontainerregistryname/k8s-probes-test:1.0.0 . </code>
 - Push the image to ACR</br>
-<code> docker push <azurecontainerregistryname>/k8s-probes-test:1.0.0 </code>
+<code> docker push azurecontainerregistryname/k8s-probes-test:1.0.0 </code>
 - Login to Azure Kubernetes Service cluster</br>
-<code> az aks get-credentials --resource-group <resourcegroupofakscluster> --name <aksclustername> </code>
+<code> az aks get-credentials --resource-group resourcegroupofakscluster --name aksclustername </code>
 - Deploy Probes.yaml to AKS cluster</br>
 <code> kubectl apply -f Probes.yaml --record </code>
 - View all pods that are created and running</br>
 <code> kubect get pods </code>
 - View output of one of the pod</br>
-<code> kubectl logs -f <id of a pod> </code>
+<code> kubectl logs -f poduniqueuid </code>
