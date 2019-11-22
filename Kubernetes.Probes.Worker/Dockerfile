@@ -4,7 +4,7 @@ WORKDIR /app
 FROM mcr.microsoft.com/dotnet/core/sdk:3.0-buster AS build
 WORKDIR /src
 COPY ["Kubernetes.Probes.Worker/Kubernetes.Probes.Worker.csproj", "Kubernetes.Probes.Worker/"]
-COPY ["Kubernetes.Probes/Kubernetes.Probes.csproj", "Kubernetes.Probes/"]
+COPY ["Kubernetes.Probes.Core/Kubernetes.Probes.Core.csproj", "Kubernetes.Probes.Core/"]
 RUN dotnet restore "Kubernetes.Probes.Worker/Kubernetes.Probes.Worker.csproj"
 COPY . .
 WORKDIR "/src/Kubernetes.Probes.Worker"
