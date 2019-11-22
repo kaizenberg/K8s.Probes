@@ -8,10 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="Properties\launchSettings.json" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Lamar" Version="4.0.0" />
     <PackageReference Include="Lamar.Microsoft.DependencyInjection" Version="4.0.2" />
     <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
@@ -29,9 +25,5 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Kubernetes.Probes.Core\Kubernetes.Probes.Core.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Properties\" />
   </ItemGroup>
 </Project>

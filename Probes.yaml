@@ -53,8 +53,8 @@ spec:
             command: 
             - rm
             - ready.txt
-          initialDelaySeconds: 10
-          periodSeconds: 10
+          initialDelaySeconds: 30
+          periodSeconds: 30
           successThreshold: 1
           timeoutSeconds: 1
         # After initialDelaySeconds check (within timeoutSeconds) if pods generated alive.txt file (successThreshold many times). If they did then recheck every periodSeconds.
