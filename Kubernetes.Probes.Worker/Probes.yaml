@@ -1,0 +1,44 @@
+﻿apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8s-probes-test-deployment
+  labels:
+    app: k8s-probes-test
+spec:
+  replicas: 3
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: k8s-probes-test
+  template:
+    metadata:
+      labels:
+        app: k8s-probes-test
+    spec:
+      containers:
+      - name: k8s-probes-test
+        image: kaizenbergprodcr.azurecr.io/k8s-probes-test:1.0.0
+        # After initialDelaySeconds check (within timeoutSeconds) if pods generated ready.txt file (successThreshold many times). If they did not then recheck every periodSeconds.
+        # If probes fail after failureThreshold attempts i.e. after (failureThreshold * periodSeconds) seconds then pods do not receive traffic / requests.
+        readinessProbe:
+          failureThreshold: 3
+          command:
+            - rm ready.txt
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        # After initialDelaySeconds check (within timeoutSeconds) if pods generated alive.txt file (successThreshold many times). If they did then recheck every periodSeconds.
+        # If probes fail after failureThreshold attempts i.e. after (failureThreshold * periodSeconds) seconds then pods are rebooted.
+        livenessProbe:
+          failureThreshold: 3
+          command:
+            - rm alive.txt
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1

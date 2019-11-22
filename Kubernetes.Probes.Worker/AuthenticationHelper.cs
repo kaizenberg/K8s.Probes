@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Net;
 using System.Net.Http;
 using System.Text;
@@ -20,6 +21,7 @@ namespace Kubernetes.Probes.Worker
                                         WebUtility.UrlEncode(clientSecret));
 
             var body = await HttpPost(tenantId, payload);
+
             return body.access_token;
         }
 
@@ -29,12 +31,13 @@ namespace Kubernetes.Probes.Worker
             {
                 var address = String.Format(TokenEndpoint, tenantId);
                 var content = new StringContent(payload, Encoding.UTF8, "application/x-www-form-urlencoded");
+
                 using (var response = await client.PostAsync(address, content))
                 {
                     if (!response.IsSuccessStatusCode)
                     {
-                        Console.WriteLine("Status:  {0}", response.StatusCode);
-                        Console.WriteLine("Content: {0}", await response.Content.ReadAsStringAsync());
+                        Trace.WriteLine($"Status:  {response.StatusCode}");
+                        Trace.WriteLine($"Content: {await response.Content.ReadAsStringAsync()}");
                     }
 
                     response.EnsureSuccessStatusCode();

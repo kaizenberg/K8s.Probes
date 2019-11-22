@@ -9,6 +9,7 @@ D:\GitHub\Public\Kubernetes\Probes\Kubernetes.Probes.Core\obj\Debug\netstandard2
 D:\GitHub\Public\K8s.Probes\Kubernetes.Probes.Core\bin\Debug\netstandard2.1\Kubernetes.Probes.Core.deps.json
 D:\GitHub\Public\K8s.Probes\Kubernetes.Probes.Core\bin\Debug\netstandard2.1\Kubernetes.Probes.Core.dll
 D:\GitHub\Public\K8s.Probes\Kubernetes.Probes.Core\bin\Debug\netstandard2.1\Kubernetes.Probes.Core.pdb
+D:\GitHub\Public\K8s.Probes\Kubernetes.Probes.Core\obj\Debug\netstandard2.1\Kubernetes.Probes.Core.csprojAssemblyReference.cache
 D:\GitHub\Public\K8s.Probes\Kubernetes.Probes.Core\obj\Debug\netstandard2.1\Kubernetes.Probes.Core.AssemblyInfoInputs.cache
 D:\GitHub\Public\K8s.Probes\Kubernetes.Probes.Core\obj\Debug\netstandard2.1\Kubernetes.Probes.Core.AssemblyInfo.cs
 D:\GitHub\Public\K8s.Probes\Kubernetes.Probes.Core\obj\Debug\netstandard2.1\Kubernetes.Probes.Core.dll

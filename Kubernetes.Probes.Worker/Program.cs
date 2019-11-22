@@ -30,6 +30,17 @@ namespace Kubernetes.Probes.Worker
                                 s.WithDefaultConventions();
                             });
 
+
+                        registry.Configure<ProbeConfig>(option =>
+                        {
+                            int.TryParse(Environment.GetEnvironmentVariable("AliveFileCreationIntervalSeconds"),
+                                out int interval);
+
+                            option.AliveFileCreationIntervalSeconds = interval;
+                            option.ReadyFilePath = Environment.GetEnvironmentVariable("ReadyFilePath");
+                            option.AliveFilePath = Environment.GetEnvironmentVariable("AliveFilePath");
+                        });
+
                         registry.Configure<AppConfig>(option =>
                         {
                             option.RequestQueueConnectionString = Environment.GetEnvironmentVariable("RequestQueueConnectionString");

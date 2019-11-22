@@ -24,21 +24,16 @@ namespace Kubernetes.Probes.Worker
 
         public async Task ExecuteAsync(CancellationToken token)
         {
-            _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
+            _logger.LogInformation($"Worker started at {DateTimeOffset.Now}");
 
-            //Send a dummy message
-            await this.SendMessagesAsync(_config.ResponseQueueConnectionString, _config.ResponseQueue).ConfigureAwait(false);
+            //Send dumy messages to the request queue
+            await this.SendMessagesAsync(_config.RequestQueueConnectionString, _config.RequestQueue, token).ConfigureAwait(false);
 
-            //Receive a message from the input queue
-            var receiveTask = this.ReceiveMessagesAsync(_config.RequestQueueConnectionString, _config.RequestQueue, token);
-
-            //Send a message to the output queue
-            var sendTask = this.SendMessagesAsync(_config.ResponseQueueConnectionString, _config.ResponseQueue);
-
-            await receiveTask.ContinueWith(send => sendTask).ConfigureAwait(false);
+            //Start receiving those messages
+            await this.ReceiveMessagesAsync(_config.RequestQueueConnectionString, _config.RequestQueue, token);
         }
 
-        async Task ReceiveMessagesAsync(string connectionString, string queueName, CancellationToken cancellationToken)
+        private async Task ReceiveMessagesAsync(string connectionString, string queueName, CancellationToken cancellationToken)
         {
             var receiver = new MessageReceiver(connectionString, queueName, ReceiveMode.PeekLock);
 
@@ -64,23 +59,12 @@ namespace Kubernetes.Probes.Worker
 
                         dynamic scientist = JsonConvert.DeserializeObject(Encoding.UTF8.GetString(body));
 
-                        lock (Console.Out)
-                        {
-                            Console.ForegroundColor = ConsoleColor.Cyan;
-                            Console.WriteLine(
-                                "\t\t\t\tMessage received: \n\t\t\t\t\t\tMessageId = {0}, \n\t\t\t\t\t\tSequenceNumber = {1}, \n\t\t\t\t\t\tEnqueuedTimeUtc = {2}," +
-                                "\n\t\t\t\t\t\tExpiresAtUtc = {5}, \n\t\t\t\t\t\tContentType = \"{3}\", \n\t\t\t\t\t\tSize = {4},  \n\t\t\t\t\t\tContent: [ firstName = {6}, name = {7} ]",
-                                message.MessageId,
-                                message.SystemProperties.SequenceNumber,
-                                message.SystemProperties.EnqueuedTimeUtc,
-                                message.ContentType,
-                                message.Size,
-                                message.ExpiresAtUtc,
-                                scientist.firstName,
-                                scientist.name);
-                            Console.ResetColor();
-                        }
+                        _logger.LogInformation($"Received MessageId = {message.MessageId} with Body = {scientist.name}");
+
                         await receiver.CompleteAsync(message.SystemProperties.LockToken);
+
+                        //Send a copy of this message to the response queue
+                        await this.SendMessagesAsync(_config.ResponseQueueConnectionString, _config.ResponseQueue, cancellationToken);
                     }
                     else
                     {
@@ -94,46 +78,33 @@ namespace Kubernetes.Probes.Worker
 
         private Task LogMessageHandlerException(ExceptionReceivedEventArgs e)
         {
-            Console.WriteLine("Exception: \"{0}\" {0}", e.Exception.Message, e.ExceptionReceivedContext.EntityPath);
+            _logger.LogInformation($"Exception: {e.Exception.Message} for {e.ExceptionReceivedContext.EntityPath}");
             return Task.CompletedTask;
         }
 
-        async Task SendMessagesAsync(string connectionString, string queueName)
+        private async Task SendMessagesAsync(string connectionString, string queueName, CancellationToken cancellationToken)
         {
             var sender = new MessageSender(connectionString, queueName);
 
-            dynamic data = new[]
+            dynamic data = new
             {
-                new {name = "Einstein", firstName = "Albert"},
-                new {name = "Heisenberg", firstName = "Werner"},
-                new {name = "Curie", firstName = "Marie"},
-                new {name = "Hawking", firstName = "Steven"},
-                new {name = "Newton", firstName = "Isaac"},
-                new {name = "Bohr", firstName = "Niels"},
-                new {name = "Faraday", firstName = "Michael"},
-                new {name = "Galilei", firstName = "Galileo"},
-                new {name = "Kepler", firstName = "Johannes"},
-                new {name = "Kopernikus", firstName = "Nikolaus"}
+                name = "CV Raman",
             };
 
-            for (int i = 0; i < data.Length; i++)
+            var message = new Message(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(data)))
             {
-                var message = new Message(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(data[i])))
-                {
-                    ContentType = "application/json",
-                    Label = "Scientist",
-                    MessageId = i.ToString(),
-                    TimeToLive = TimeSpan.FromMinutes(2)
-                };
+                ContentType = "application/json",
+                Label = "Scientist",
+                MessageId = "0",
+                TimeToLive = TimeSpan.FromMinutes(2)
+            };
 
-                await sender.SendAsync(message);
-                lock (Console.Out)
-                {
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine("Message sent: Id = {0}", message.MessageId);
-                    Console.ResetColor();
-                }
-            }
+            await sender.SendAsync(message);
+
+            //uncomment below line to demostrate how errors in the service lead to discontinuation of alive.txt file creation that ultimately leeds to pod restart.
+            //throw new UnauthorizedException("Fake authorization error orccured");
+
+            _logger.LogInformation($"Sent MessageId = {message.MessageId} to {queueName}");
         }
     }
 }

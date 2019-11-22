@@ -24,9 +24,9 @@ namespace Kubernetes.Probes.Worker
             _logger = logger;
         }
 
-        public async Task<bool> CheckAsync(CancellationToken ct)
+        public async Task<bool> TestAsync(CancellationToken ct)
         {
-            Console.WriteLine($"Probing dependency: Service Bus Queue - {_queueName}");
+            _logger.LogInformation($"Checking dependency: {_queueName}");
 
             var result = false;
             var token = await AuthenticationHelper.AcquireTokenByServicePrincipal(_config.TenantId, _config.ClientId, _config.ClientSecret);
@@ -43,6 +43,8 @@ namespace Kubernetes.Probes.Worker
                     result = response.IsSuccessStatusCode;
                 }
             }
+
+            _logger.LogInformation(result ? $"{_queueName} is accessible" : $"{_queueName} isn't accessible");
 
             return result;
         }

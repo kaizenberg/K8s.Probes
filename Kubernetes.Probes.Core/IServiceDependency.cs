@@ -5,6 +5,6 @@ namespace Kubernetes.Probes.Core
 {
     public interface IServiceDependency
     {
-        Task<bool> CheckAsync(CancellationToken token);
+        Task<bool> TestAsync(CancellationToken token);
     }
 }
