@@ -4,7 +4,7 @@ This sample code demonstrates how console or background service can easily achie
 
 <h2>Use case</h2>
 
-- Cross-platform .Net Core 3.0 application building framework is used to develop a worker service that runs continuously and processes some long running jobs that it reads from a Request message queue and writes the result to Response message queue.
+- .Net Core 3.0 application framework is used to develop cross-platform worker service that runs continuously and actively processes  long running jobs that it reads from Request message queue and writes results to Response message queue.
 - App is containerized using Docker Linux VM and saved to a private Azure Container Registry (ACR).
 - It is then hosted on Azure inside Azure Kubernetes Service (AKS) cluster.
 - App relies on an external services such as two Azure Service Bus Queues.
