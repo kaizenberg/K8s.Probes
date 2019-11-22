@@ -24,7 +24,8 @@ Other 3rd party libraries used for demonstration purpose are:
 <h2>Running the app</h2>
 
 - Clone the repository to developer desktop
-- Download & install Azure CLI
+- Install Docker for Winodws
+- Install Azure CLI
 - Open PowerShell
 - Login to Azure account from developer desktop</br>
 <code> az login </code>
