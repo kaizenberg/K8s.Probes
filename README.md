@@ -2,7 +2,7 @@
 
 This sample code demonstrates how console or background service can easily achieve self-healing capability if it is containerized and hosted in Kubernetes cluster.
 
-<h2>Usecase</h2>
+<h2>Use case</h2>
 
 - Cross-platform .Net Core 3.0 application building framework is used to develop a worker service that runs continuously and processes some long running jobs that it picks up by itself.
 - App is containerized using Docker Linux VM
