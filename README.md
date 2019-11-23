@@ -16,15 +16,27 @@ You can read about Kubernetes Readiness & Liveliness probes. Then read below art
 
 https://kaizenberglabs.wordpress.com/2019/10/28/kubernetes-essentials-readiness-liveliness-probes/
 
-Other 3rd party libraries used for demonstration purpose are: 
+Other 3rd party libraries used for demonstration purpose are:
+
 - Polly (Retry Policy)
 - Lamar (IoC) 
 - NLog (Logging)
 
 <h2>Running the app</h2>
 
-- Edit values of all environment variables in Probes.yaml file
+<h4>Azure Config</h4>
 
+- Azure Subsription
+- Resource Group
+- Azure Container Registry instance
+- Azure Kubernetes Service instance
+- Service Bus Namespace with 2 queues
+- SAS keys for both queues
+- Service Principal that has access to Reader access on Service Bus Namespace
+
+<h4>Steps</h4>
+
+- Edit values of all environment variables in Probes.yaml file
 <strong>TenantId</strong> - Azure Active Directory Tenant Id</br>
 <strong>SubscriptionId</strong> - Azure Subscription Id</br>
 <strong>ResourceGroup</strong> - Name of Resource Group that contains AKS Cluster</br>
@@ -36,9 +48,8 @@ Other 3rd party libraries used for demonstration purpose are:
 <strong>ClientId</strong> - Service Principal Client Id</br>
 <strong>ClientSecret</strong> - Service Principal Client Secret</br>
 <strong>AliveFileCreationIntervalSeconds</strong> - Interval in seconds of creating alive file</br>
-(optional) <strong>AliveFilePath</strong> - Full path including file name of alive file</br>
-(optional) <strong>ReadyFilePath</strong> - Full path including file name of ready file</br>
-
+(optional) <strong>AliveFilePath</strong> - Full path including file name for alive check</br>
+(optional) <strong>ReadyFilePath</strong> - Full path including file name for ready check</br>
 - Clone the repository to developer desktop
 - Install Docker for Winodws
 - Install Azure CLI
