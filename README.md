@@ -32,11 +32,11 @@ https://kaizenberglabs.wordpress.com/2019/10/28/kubernetes-essentials-readiness-
 - Azure Kubernetes Service instance
 - Service Bus Namespace with 2 queues
 - SAS keys for both queues
-- Service Principal that has access to Reader access on Service Bus Namespace
+- Service Principal with Reader access on Resource Group
 
 <h4>Steps</h4>
 
-- Clone the repository to developer desktop
+- Clone repository locally
 - Install Docker for Winodws
 - Install Azure CLI
 - Open PowerShell
@@ -46,7 +46,7 @@ https://kaizenberglabs.wordpress.com/2019/10/28/kubernetes-essentials-readiness-
 <code> az aks install-cli </code>
 - Login to Azure Container Registry</br>
 <code> docker login azurecontainerregistryname -u username -p password </code>
-- Navigate to the source code
+- Navigate to source code
 - Build Dockerfile of this project & tag it</br>
 <code> docker build -f Dockerfile -t azurecontainerregistryname/k8s-probes-test:1.0.0 . </code>
 - Push the image to ACR</br>
