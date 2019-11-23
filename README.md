@@ -25,19 +25,19 @@ Other 3rd party libraries used for demonstration purpose are:
 
 - Edit values of all environment variables in Probes.yaml file
 
-TenantId - Azure Active Directory Tenant Id 
-SubscriptionId - Azure Subscription Id
-ResourceGroup - Name of Resource Group that contains AKS Cluster
-ServiceBusNamespace - Service Bus Namespace name
-RequestQueue - Request Queue name
-ResponseQueue - Response Queue name
-RequestQueueConnectionString - Request Queue SAS key
-ResponseQueueConnectionString - Response Queue SAS key
-ClientId - Service Principal Client Id
-ClientSecret - Service Principal Client Secret
-AliveFileCreationIntervalSeconds - Interval of creation of alive.txt file
-(optional) AliveFilePath - Full path including file name of alive file
-(optional) ReadyFilePath - Full path including file name of ready file
+TenantId - Azure Active Directory Tenant Id</br>
+SubscriptionId - Azure Subscription Id</br>
+ResourceGroup - Name of Resource Group that contains AKS Cluster</br>
+ServiceBusNamespace - Service Bus Namespace name</br>
+RequestQueue - Request Queue name</br>
+ResponseQueue - Response Queue name</br>
+RequestQueueConnectionString - Request Queue SAS key</br>
+ResponseQueueConnectionString - Response Queue SAS key</br>
+ClientId - Service Principal Client Id</br>
+ClientSecret - Service Principal Client Secret</br>
+AliveFileCreationIntervalSeconds - Interval in seconds of creating alive file</br>
+(optional) AliveFilePath - Full path including file name of alive file</br>
+(optional) ReadyFilePath - Full path including file name of ready file</br>
 
 - Clone the repository to developer desktop
 - Install Docker for Winodws
