@@ -25,19 +25,19 @@ Other 3rd party libraries used for demonstration purpose are:
 
 - Edit values of all environment variables in Probes.yaml file
 
-TenantId - Azure Active Directory Tenant Id</br>
-SubscriptionId - Azure Subscription Id</br>
-ResourceGroup - Name of Resource Group that contains AKS Cluster</br>
-ServiceBusNamespace - Service Bus Namespace name</br>
-RequestQueue - Request Queue name</br>
-ResponseQueue - Response Queue name</br>
-RequestQueueConnectionString - Request Queue SAS key</br>
-ResponseQueueConnectionString - Response Queue SAS key</br>
-ClientId - Service Principal Client Id</br>
-ClientSecret - Service Principal Client Secret</br>
-AliveFileCreationIntervalSeconds - Interval in seconds of creating alive file</br>
-(optional) AliveFilePath - Full path including file name of alive file</br>
-(optional) ReadyFilePath - Full path including file name of ready file</br>
+<strong>TenantId</strong> - Azure Active Directory Tenant Id</br>
+<strong>SubscriptionId</strong> - Azure Subscription Id</br>
+<strong>ResourceGroup</strong> - Name of Resource Group that contains AKS Cluster</br>
+<strong>ServiceBusNamespace</strong> - Service Bus Namespace name</br>
+<strong>RequestQueue</strong> - Request Queue name</br>
+<strong>ResponseQueue</strong> - Response Queue name</br>
+<strong>RequestQueueConnectionString</strong> - Request Queue SAS key</br>
+<strong>ResponseQueueConnectionString</strong> - Response Queue SAS key</br>
+<strong>ClientId</strong> - Service Principal Client Id</br>
+<strong>ClientSecret</strong> - Service Principal Client Secret</br>
+<strong>AliveFileCreationIntervalSeconds</strong> - Interval in seconds of creating alive file</br>
+(optional) <strong>AliveFilePath</strong> - Full path including file name of alive file</br>
+(optional) <strong>ReadyFilePath</strong> - Full path including file name of ready file</br>
 
 - Clone the repository to developer desktop
 - Install Docker for Winodws
@@ -46,7 +46,7 @@ AliveFileCreationIntervalSeconds - Interval in seconds of creating alive file</b
 - Login to Azure account from developer desktop</br>
 <code> az login </code>
 - Install Kubernetes CLI</br>
-<code >az aks install-cli </code>
+<code> az aks install-cli </code>
 - Login to Azure Container Registry</br>
 <code> docker login azurecontainerregistryname -u username -p password </code>
 - Navigate to the source code
