@@ -54,7 +54,7 @@ Other 3rd party libraries used for demonstration purpose are:
 - Login to Azure Kubernetes Service cluster</br>
 <code> az aks get-credentials --resource-group resourcegroupofakscluster --name aksclustername </code>
 - Deploy Probes.yaml to AKS cluster</br>
-- Edit Probes.yaml file. Set values for Environment Variables as per Azure Setup
+- Edit Probes.yaml file. Set values for Environment Variables as per Azure Setup</br>
 <strong>TenantId</strong> - Azure Active Directory Tenant Id</br>
 <strong>SubscriptionId</strong> - Azure Subscription Id</br>
 <strong>ResourceGroup</strong> - Name of Resource Group that contains AKS Cluster</br>
