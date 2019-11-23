@@ -24,7 +24,7 @@ Other 3rd party libraries used for demonstration purpose are:
 
 <h2>Running the app</h2>
 
-<h4>Azure Config</h4>
+<h4>Azure Setup</h4>
 
 - Azure Subsription
 - Resource Group
@@ -36,20 +36,6 @@ Other 3rd party libraries used for demonstration purpose are:
 
 <h4>Steps</h4>
 
-- Edit values of all environment variables in Probes.yaml file
-<strong>TenantId</strong> - Azure Active Directory Tenant Id</br>
-<strong>SubscriptionId</strong> - Azure Subscription Id</br>
-<strong>ResourceGroup</strong> - Name of Resource Group that contains AKS Cluster</br>
-<strong>ServiceBusNamespace</strong> - Service Bus Namespace name</br>
-<strong>RequestQueue</strong> - Request Queue name</br>
-<strong>ResponseQueue</strong> - Response Queue name</br>
-<strong>RequestQueueConnectionString</strong> - Request Queue SAS key</br>
-<strong>ResponseQueueConnectionString</strong> - Response Queue SAS key</br>
-<strong>ClientId</strong> - Service Principal Client Id</br>
-<strong>ClientSecret</strong> - Service Principal Client Secret</br>
-<strong>AliveFileCreationIntervalSeconds</strong> - Interval in seconds of creating alive file</br>
-(optional) <strong>AliveFilePath</strong> - Full path including file name for alive check</br>
-(optional) <strong>ReadyFilePath</strong> - Full path including file name for ready check</br>
 - Clone the repository to developer desktop
 - Install Docker for Winodws
 - Install Azure CLI
@@ -68,6 +54,20 @@ Other 3rd party libraries used for demonstration purpose are:
 - Login to Azure Kubernetes Service cluster</br>
 <code> az aks get-credentials --resource-group resourcegroupofakscluster --name aksclustername </code>
 - Deploy Probes.yaml to AKS cluster</br>
+- Edit Probes.yaml file. Set values for Environment Variables as per Azure Setup
+<strong>TenantId</strong> - Azure Active Directory Tenant Id</br>
+<strong>SubscriptionId</strong> - Azure Subscription Id</br>
+<strong>ResourceGroup</strong> - Name of Resource Group that contains AKS Cluster</br>
+<strong>ServiceBusNamespace</strong> - Service Bus Namespace name</br>
+<strong>RequestQueue</strong> - Request Queue name</br>
+<strong>ResponseQueue</strong> - Response Queue name</br>
+<strong>RequestQueueConnectionString</strong> - Request Queue SAS key</br>
+<strong>ResponseQueueConnectionString</strong> - Response Queue SAS key</br>
+<strong>ClientId</strong> - Service Principal Client Id</br>
+<strong>ClientSecret</strong> - Service Principal Client Secret</br>
+<strong>AliveFileCreationIntervalSeconds</strong> - Interval in seconds of creating alive file</br>
+(optional) <strong>AliveFilePath</strong> - Full path including file name for alive check</br>
+(optional) <strong>ReadyFilePath</strong> - Full path including file name for ready check</br>
 <code> kubectl apply -f Probes.yaml --record </code>
 - View all pods that are created and running</br>
 <code> kubect get pods </code>
