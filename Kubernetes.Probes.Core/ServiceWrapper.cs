@@ -80,7 +80,7 @@ namespace Kubernetes.Probes.Core
             },
             new Context("ready"), token).ConfigureAwait(false);
 
-            _logger.LogInformation("Created ready.txt file");
+            _logger.LogInformation("Created readiness check file");
         }
 
         private async Task SendLivelinessAsync(TimeSpan interval, CancellationToken token)
@@ -90,7 +90,7 @@ namespace Kubernetes.Probes.Core
                 await _retryPolicy.ExecuteAsync((ctx, ct) => File.WriteAllTextAsync(_config.AliveFilePath, DateTime.UtcNow.ToString(), ct),
                     new Context("alive"), token).ConfigureAwait(false);
 
-                _logger.LogInformation("Created alive.txt file");
+                _logger.LogInformation("Created liveliness check file");
 
                 await Task.Delay(interval, token).ConfigureAwait(false);
             }
