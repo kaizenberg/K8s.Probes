@@ -16,7 +16,7 @@ You can read about Kubernetes Readiness & Liveliness probes. Then read below art
 
 https://kaizenberglabs.wordpress.com/2019/10/28/kubernetes-essentials-readiness-liveliness-probes/
 
-Other 3rd party libraries used for demonstration purpose are:
+<h4>3rd party libraries</h4>
 
 - Polly (Retry Policy)
 - Lamar (IoC) 
@@ -68,6 +68,7 @@ Other 3rd party libraries used for demonstration purpose are:
 <strong>AliveFileCreationIntervalSeconds</strong> - Interval in seconds of creating alive file</br>
 (optional) <strong>AliveFilePath</strong> - Full path including file name for alive check</br>
 (optional) <strong>ReadyFilePath</strong> - Full path including file name for ready check</br>
+- Deploy Probes on AKS cluster</br>
 <code> kubectl apply -f Probes.yaml --record </code>
 - View all pods that are created and running</br>
 <code> kubect get pods </code>
