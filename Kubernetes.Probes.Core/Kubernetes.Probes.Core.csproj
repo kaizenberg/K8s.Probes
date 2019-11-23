@@ -2,6 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>kaizenberg.com</Authors>
+    <Description>Implement Kubernetes Readiness &amp; Liveliness probes to add self-healing capability in console, desktop, or background services / daemon applications.</Description>
+    <PackageProjectUrl>https://github.com/kaizenberg/K8s.Probes</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>
