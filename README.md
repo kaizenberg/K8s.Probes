@@ -75,5 +75,6 @@ https://kaizenberglabs.wordpress.com/2019/10/28/kubernetes-essentials-readiness-
 <code> kubectl logs -f poduniqueuid </code>
 
 <h4>Refereces</h4>
-- https://docs.microsoft.com/en-us/dotnet/architecture/microservices/multi-container-microservice-net-applications/background-tasks-with-ihostedservice
+
+- https://docs.microsoft.com/en-us/dotnet/architecture/microservices/multi-container-microservice-net-applications/background-tasks-with-ihostedservice</br>
 - https://docs.microsoft.com/en-us/aspnet/core/fundamentals/host/hosted-services?view=aspnetcore-3.0&tabs=visual-studio
