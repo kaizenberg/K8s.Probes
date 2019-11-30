@@ -27,32 +27,34 @@ spec:
           value: ""
         - name: SubscriptionId
           value: ""
-        - name: ResourceGroup
-          value: ""
-        - name: ServiceBusNamespace
-          value: ""
-        - name: RequestQueue
-          value: ""
-        - name: ResponseQueue
-          value: ""
-        - name: RequestQueueConnectionString
-          value: ""
-        - name: ResponseQueueConnectionString
-          value: ""
         - name: ClientId
           value: ""
         - name: ClientSecret
           value: ""
-        - name: AliveFileCreationIntervalSeconds
+        - name: ResourceGroupName
+          value: ""
+        - name: ServiceBusNamespace
+          value: ""
+        - name: ServiceBusNamespaceSASKey
+          value: ""
+        - name: RequestQueueName
+          value: ""
+        - name: ResponseQueueName
+          value: ""
+        - name: LivenessSignalIntervalSeconds
+          value: "5"
+        - name: StartupFilePath
+          value: "5"
+        - name: LivenessFilePath
           value: "5"
         # After initialDelaySeconds check (within timeoutSeconds) if pods generated ready.txt file (successThreshold many times). If they did not then recheck every periodSeconds.
         # If probes fail after failureThreshold attempts i.e. after (failureThreshold * periodSeconds) seconds then pods do not receive traffic / requests.
-        readinessProbe:
+        startup:
           failureThreshold: 1
           exec:
             command: 
             - rm
-            - ready.txt
+            - started.txt
           initialDelaySeconds: 30
           periodSeconds: 30
           successThreshold: 1

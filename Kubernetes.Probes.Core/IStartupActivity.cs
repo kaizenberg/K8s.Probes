@@ -3,8 +3,8 @@ using System.Threading.Tasks;
 
 namespace Kubernetes.Probes.Core
 {
-    public interface IServiceDependency
+    public interface IStartupActivity
     {
-        Task<bool> TestAsync(CancellationToken token);
+        Task<bool> ExecuteAsync(CancellationToken token);
     }
 }

@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.29418.71
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kubernetes.Probes.Worker", "Kubernetes.Probes.Worker\Kubernetes.Probes.Worker.csproj", "{805619BA-1027-4D75-A5C5-A349AA8C7D00}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kubernetes.Probes.Core", "Kubernetes.Probes.Core\Kubernetes.Probes.Core.csproj", "{7F3202C3-B775-46B3-96E3-F2ACC950C0D6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kubernetes.Probes.Core", "Kubernetes.Probes.Core\Kubernetes.Probes.Core.csproj", "{7F3202C3-B775-46B3-96E3-F2ACC950C0D6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kubernetes.Probes.Worker.Tester", "Kubernetes.Probes.Worker.Tester\Kubernetes.Probes.Worker.Tester.csproj", "{765E4252-0151-4116-8C16-68760229DC93}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{7F3202C3-B775-46B3-96E3-F2ACC950C0D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7F3202C3-B775-46B3-96E3-F2ACC950C0D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7F3202C3-B775-46B3-96E3-F2ACC950C0D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{765E4252-0151-4116-8C16-68760229DC93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{765E4252-0151-4116-8C16-68760229DC93}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{765E4252-0151-4116-8C16-68760229DC93}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{765E4252-0151-4116-8C16-68760229DC93}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

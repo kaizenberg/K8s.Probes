@@ -3,9 +3,7 @@ using Microsoft.Azure.ServiceBus;
 using Microsoft.Azure.ServiceBus.Core;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
 using System;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -15,96 +13,93 @@ namespace Kubernetes.Probes.Worker
     {
         private readonly ILogger<ServiceImplementation> _logger;
         private readonly AppConfig _config;
+        private MessageReceiver _receiver;
+        private TaskCompletionSource<bool> _doneReceiving;
 
         public ServiceImplementation(ILogger<ServiceImplementation> logger, IOptions<AppConfig> config)
         {
             _logger = logger;
             _config = config.Value;
+            _doneReceiving = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
         }
 
         public async Task ExecuteAsync(CancellationToken token)
         {
             _logger.LogInformation($"Worker started at {DateTimeOffset.Now}");
-
-            //Send dumy messages to the request queue
-            await this.SendMessagesAsync(_config.RequestQueueConnectionString, _config.RequestQueue, token).ConfigureAwait(false);
-
-            //Start receiving those messages
-            await this.ReceiveMessagesAsync(_config.RequestQueueConnectionString, _config.RequestQueue, token);
+            await ReceiveMessagesAsync(_config.ServiceBusNamespaceSASKey, _config.RequestQueueName, token);
         }
 
         private async Task ReceiveMessagesAsync(string connectionString, string queueName, CancellationToken cancellationToken)
         {
-            var receiver = new MessageReceiver(connectionString, queueName, ReceiveMode.PeekLock);
+            // Do not retry communicating with the service bus if there are issues with the connection
+            _receiver = new MessageReceiver(connectionString, queueName, ReceiveMode.PeekLock, RetryPolicy.NoRetry);
 
-            var doneReceiving = new TaskCompletionSource<bool>();
-            // close the receiver and factory when the CancellationToken fires 
-            cancellationToken.Register(
-                async () =>
+            cancellationToken.Register(async () =>
+            {
+                await _receiver.CloseAsync().ConfigureAwait(false);
+            });
+
+            // Register the RegisterMessageHandler callback
+            _receiver.RegisterMessageHandler(
+                MessageHandlerCallback,
+                new MessageHandlerOptions(LogMessageHandlerException)
                 {
-                    await receiver.CloseAsync();
-                    doneReceiving.SetResult(true);
+                    AutoComplete = false,
+                    MaxConcurrentCalls = 1,
+                    MaxAutoRenewDuration = TimeSpan.FromMinutes(5)
                 });
 
-            // register the RegisterMessageHandler callback
-            receiver.RegisterMessageHandler(
-                async (message, cancellationToken1) =>
-                {
-                    if (message.Label != null &&
-                        message.ContentType != null &&
-                        message.Label.Equals("Scientist", StringComparison.InvariantCultureIgnoreCase) &&
-                        message.ContentType.Equals("application/json", StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        var body = message.Body;
+            // Await on the task so that caller see that the method doesn't run to completion
+            await _doneReceiving.Task;
+        }
 
-                        dynamic scientist = JsonConvert.DeserializeObject(Encoding.UTF8.GetString(body));
+        private async Task MessageHandlerCallback(Message message, CancellationToken cancellationToken1)
+        {
+            if (!_receiver.IsClosedOrClosing &&
+                message.Label != null &&
+                message.ContentType != null &&
+                message.Label.Equals("Scientist", StringComparison.InvariantCultureIgnoreCase) &&
+                message.ContentType.Equals("application/json", StringComparison.InvariantCultureIgnoreCase))
+            {
+                _logger.LogInformation($"Received MessageId = {message.MessageId}");
 
-                        _logger.LogInformation($"Received MessageId = {message.MessageId} with Body = {scientist.name}");
+                // Fake deay to mimic long running job
+                await Task.Delay(10000).ConfigureAwait(false);
 
-                        await receiver.CompleteAsync(message.SystemProperties.LockToken);
+                // Following error doesn't get bubbled up to BackgroundServiceWraper class. Message Recevier never closes automatically.
+                throw new Exception();
 
-                        //Send a copy of this message to the response queue
-                        await this.SendMessagesAsync(_config.ResponseQueueConnectionString, _config.ResponseQueue, cancellationToken);
-                    }
-                    else
-                    {
-                        await receiver.DeadLetterAsync(message.SystemProperties.LockToken); //, "ProcessingError", "Don't know what to do with this message");
-                    }
-                },
-                new MessageHandlerOptions((e) => LogMessageHandlerException(e)) { AutoComplete = false, MaxConcurrentCalls = 1 });
+                // Send a copy of this message to the response queue
+                await this.SendMessagesAsync(_config.ServiceBusNamespaceSASKey, _config.ResponseQueueName, message.Clone(), cancellationToken1);
 
-            await doneReceiving.Task;
+                // Mark the orginal message as complete so that it is removed from the queue
+                await _receiver.CompleteAsync(message.SystemProperties.LockToken);
+            }
+            else
+            {
+                await _receiver.DeadLetterAsync(message.SystemProperties.LockToken);
+            }
         }
 
         private Task LogMessageHandlerException(ExceptionReceivedEventArgs e)
         {
-            _logger.LogInformation($"Exception: {e.Exception.Message} for {e.ExceptionReceivedContext.EntityPath}");
+            _logger.LogInformation($"Queue Name: {e.ExceptionReceivedContext.EntityPath}, {e.Exception.ToString()}");
+
+            // Set status on the Task Completion source so that caller can take necessary actions. 
+            // In this case, caller cancels parent token which triggers closure of the Message Receiver.
+            // This is only to demonstrate how to close Message Receiver when using RegisterMessageHandler. (Receive-loop is ideal & recommended way)
+            // Otherwise MessageReceivePump swallows exception thrown in this method. 
+            // Although design-wise this is correct but technically inconvenient because it doesn't provide any means to exit message processing.
+            _doneReceiving.TrySetResult(false);
+
             return Task.CompletedTask;
         }
 
-        private async Task SendMessagesAsync(string connectionString, string queueName, CancellationToken cancellationToken)
+        private async Task SendMessagesAsync(string connectionString, string queueName, Message msgCopy, CancellationToken cancellationToken)
         {
             var sender = new MessageSender(connectionString, queueName);
-
-            dynamic data = new
-            {
-                name = "CV Raman",
-            };
-
-            var message = new Message(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(data)))
-            {
-                ContentType = "application/json",
-                Label = "Scientist",
-                MessageId = "0",
-                TimeToLive = TimeSpan.FromMinutes(2)
-            };
-
-            await sender.SendAsync(message);
-
-            //uncomment below line to demostrate how errors in the service lead to discontinuation of alive.txt file creation that ultimately leeds to pod restart.
-            //throw new UnauthorizedException("Fake authorization error orccured");
-
-            _logger.LogInformation($"Sent MessageId = {message.MessageId} to {queueName}");
+            await sender.SendAsync(msgCopy).ConfigureAwait(false);
+            _logger.LogInformation($"Sent MessageId = {msgCopy.MessageId} to {queueName}");
         }
     }
 }

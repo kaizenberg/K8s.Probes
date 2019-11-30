@@ -2,10 +2,10 @@
 {
     public class ProbeConfig
     {
-        public int AliveFileCreationIntervalSeconds { get; set; }
+        public int LivenessSignalIntervalSeconds { get; set; }
 
-        public string AliveFilePath { get; set; }
+        public string LivenessFilePath { get; set; }
 
-        public string ReadyFilePath { get; set; }
+        public string StartupFilePath { get; set; }
     }
 }

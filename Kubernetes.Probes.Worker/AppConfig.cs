@@ -1,29 +1,22 @@
-﻿using Microsoft.Extensions.Logging;
-
-namespace Kubernetes.Probes.Worker
+﻿namespace Kubernetes.Probes.Worker
 {
     public class AppConfig
     {
-        public LogLevel LogLevel { get; set; }
-
-        public string ResponseQueueConnectionString { get; set; }
-
-        public string RequestQueueConnectionString { get; set; }
-
-        public string RequestQueue { get; set; }
-
-        public string ResponseQueue { get; set; }
-
+        // Azure Service Principal credentials
         public string ClientId { get; set; }
-
         public string ClientSecret { get; set; }
 
-        public string ResourceGroup { get; set; }
-
+        // Azure Account
         public string SubscriptionId { get; set; }
-
         public string TenantId { get; set; }
 
+        // Azure Resource Group on which above Service Principal has read-only/reader access. All of the services inside this group can be probed. 
+        public string ResourceGroupName { get; set; }
+
+        // Sample Service Bus that is probed
         public object ServiceBusNamespace { get; set; }
+        public string ServiceBusNamespaceSASKey { get; set; } // Used for worker's job. Required Read/Write access on queues. Especially response queue.
+        public string RequestQueueName { get; set; }
+        public string ResponseQueueName { get; set; }
     }
 }

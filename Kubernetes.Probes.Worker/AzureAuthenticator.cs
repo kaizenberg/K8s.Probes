@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Kubernetes.Probes.Worker
 {
-    public static class AuthenticationHelper
+    public static class AzureAuthenticator
     {
         const string ARMResource = "https://management.core.windows.net/";
         const string TokenEndpoint = "https://login.windows.net/{0}/oauth2/token";

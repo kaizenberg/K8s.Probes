@@ -30,34 +30,28 @@ namespace Kubernetes.Probes.Worker
                                 s.WithDefaultConventions();
                             });
 
-
                         registry.Configure<ProbeConfig>(option =>
                         {
-                            int.TryParse(Environment.GetEnvironmentVariable("AliveFileCreationIntervalSeconds"),
+                            int.TryParse(Environment.GetEnvironmentVariable("LivenessSignalIntervalSeconds"),
                                 out int interval);
 
-                            option.AliveFileCreationIntervalSeconds = interval;
-                            option.ReadyFilePath = Environment.GetEnvironmentVariable("ReadyFilePath");
-                            option.AliveFilePath = Environment.GetEnvironmentVariable("AliveFilePath");
+                            option.LivenessSignalIntervalSeconds = interval;
+                            option.StartupFilePath = Environment.GetEnvironmentVariable("StartupFilePath");
+                            option.LivenessFilePath = Environment.GetEnvironmentVariable("LivenessFilePath");
                         });
 
                         registry.Configure<AppConfig>(option =>
                         {
-                            option.RequestQueueConnectionString = Environment.GetEnvironmentVariable("RequestQueueConnectionString");
-                            option.ResponseQueueConnectionString = Environment.GetEnvironmentVariable("ResponseQueueConnectionString");
-                            option.RequestQueue = Environment.GetEnvironmentVariable("RequestQueue");
-                            option.ResponseQueue = Environment.GetEnvironmentVariable("ResponseQueue");
-                            option.ClientId = Environment.GetEnvironmentVariable("ClientId");
-                            option.ClientSecret = Environment.GetEnvironmentVariable("ClientSecret");
                             option.SubscriptionId = Environment.GetEnvironmentVariable("SubscriptionId");
                             option.TenantId = Environment.GetEnvironmentVariable("TenantId");
+                            option.ClientId = Environment.GetEnvironmentVariable("ClientId");
+                            option.ClientSecret = Environment.GetEnvironmentVariable("ClientSecret");
+
+                            option.ResourceGroupName = Environment.GetEnvironmentVariable("ResourceGroupName");
                             option.ServiceBusNamespace = Environment.GetEnvironmentVariable("ServiceBusNamespace");
-                            option.ResourceGroup = Environment.GetEnvironmentVariable("ResourceGroup");
-
-                            short.TryParse(Environment.GetEnvironmentVariable("LogLevel"),
-                                out short logLevel);
-
-                            option.LogLevel = (Microsoft.Extensions.Logging.LogLevel)logLevel;
+                            option.ServiceBusNamespaceSASKey = Environment.GetEnvironmentVariable("ServiceBusNamespaceSASKey");
+                            option.RequestQueueName = Environment.GetEnvironmentVariable("RequestQueueName");
+                            option.ResponseQueueName = Environment.GetEnvironmentVariable("ResponseQueueName");
 
                             var config = new NLog.Config.LoggingConfiguration();
 
@@ -66,48 +60,45 @@ namespace Kubernetes.Probes.Worker
                             var logconsole = new NLog.Targets.ConsoleTarget("logconsole");
 
                             // Rules for mapping loggers to targets            
-                            config.AddRule(NLog.LogLevel.FromOrdinal(logLevel), NLog.LogLevel.Fatal, logconsole);
-                            config.AddRule(NLog.LogLevel.FromOrdinal(logLevel), NLog.LogLevel.Fatal, logfile);
+                            config.AddRule(NLog.LogLevel.Info, NLog.LogLevel.Fatal, logconsole);
+                            config.AddRule(NLog.LogLevel.Info, NLog.LogLevel.Fatal, logfile);
 
                             // Apply config           
-                            NLog.LogManager.Configuration = config;
+                            LogManager.Configuration = config;
                         });
 
                         var qConfig = new Container(registry).GetInstance<IOptions<AppConfig>>().Value;
 
-                        registry.For<IServiceDependency>()
-                        .Use<QueueDependency>()
-                        .Ctor<string>("queueName").Is(qConfig.RequestQueue)
-                        .Named(qConfig.RequestQueue);
+                        registry.For<IStartupActivity>()
+                        .Use<QueueProbe>()
+                        .Ctor<string>("queueName").Is(qConfig.RequestQueueName)
+                        .Named(qConfig.RequestQueueName);
 
-                        registry.For<IServiceDependency>()
-                        .Use<QueueDependency>()
-                        .Ctor<string>("queueName").Is(qConfig.ResponseQueue)
-                        .Named(qConfig.ResponseQueue);
+                        registry.For<IStartupActivity>()
+                        .Use<QueueProbe>()
+                        .Ctor<string>("queueName").Is(qConfig.ResponseQueueName)
+                        .Named(qConfig.ResponseQueueName);
 
-                        registry.For<IDependencyFactory>().Use<DependencyFactory>();
-
-                        registry.For<IHostedService>().Use<ServiceWrapper>();
-
+                        //registry.For<IHostedService>().Use<BackgroundServiceWrapper>();
+                        registry.AddHostedService<BackgroundServiceWrapper>();
                         services.AddLamar(registry);
                     })
                     .ConfigureLogging(logging =>
                     {
                         logging.ClearProviders();
                     })
-                    .UseNLog()
-                    .UseConsoleLifetime();
+                    .UseNLog();
 
                 // Build and run the host in one go; .RCA is specialized for running it in a console.
                 // It registers SIGTERM(Ctrl-C) to the CancellationTokenSource that's shared with all services in the container.
-                await builder.RunConsoleAsync().ConfigureAwait(false);
+                await builder.Build().RunAsync().ConfigureAwait(false);
 
-                NLog.LogManager.GetCurrentClassLogger().Info("The host container has terminated. Press ANY key to exit the console.");
+                LogManager.GetCurrentClassLogger().Info("The host container has terminated. Press ANY key to exit the console.");
             }
             catch (Exception ex)
             {
                 // NLog: catch setup errors (exceptions thrown inside of any containers may not necessarily be caught)
-                NLog.LogManager.GetCurrentClassLogger().Fatal(ex, "Stopped program because of exception");
+                LogManager.GetCurrentClassLogger().Fatal(ex, "Something went wrong. Application will exit cleanly.");
                 throw;
             }
             finally
