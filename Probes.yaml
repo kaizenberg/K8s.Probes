@@ -38,23 +38,19 @@ spec:
         - name: ServiceBusNamespaceSASKey
           value: ""
         - name: RequestQueueName
-          value: ""
+          value: "demo-request-queue"
         - name: ResponseQueueName
-          value: ""
+          value: "demo-response-queue"
         - name: LivenessSignalIntervalSeconds
-          value: "5"
-        - name: StartupFilePath
-          value: "5"
-        - name: LivenessFilePath
           value: "5"
         # After initialDelaySeconds check (within timeoutSeconds) if pods generated ready.txt file (successThreshold many times). If they did not then recheck every periodSeconds.
         # If probes fail after failureThreshold attempts i.e. after (failureThreshold * periodSeconds) seconds then pods do not receive traffic / requests.
-        startup:
+        startupProbe:
           failureThreshold: 1
           exec:
             command: 
             - rm
-            - started.txt
+            - started.signal
           initialDelaySeconds: 30
           periodSeconds: 30
           successThreshold: 1
@@ -66,7 +62,7 @@ spec:
           exec:
             command:
             - rm
-            - alive.txt
+            - alive.signal
           initialDelaySeconds: 10
           periodSeconds: 10
           successThreshold: 1
