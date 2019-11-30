@@ -9,8 +9,8 @@ This sample code demonstrates how console or background service can easily achie
 - App is containerized using Docker Linux VM and saved to a private Azure Container Registry (ACR).
 - It is then hosted on Azure inside Azure Kubernetes Service (AKS) cluster.
 - App relies on an external services such as two Azure Service Bus Queues.
-- App must not start processing jobs until it ensures that all of its dependencies are accessible and hence available. This is readiness check.
-- After successful validtion it should periodically report that it is runnning and not frozen or crashed. This is a liveliness check.
+- App must not start processing jobs until it ensures that all of its dependencies are accessible and hence available. This is startup check. Kubernetes Startup probe is in ALPHA and may only be available in v1.16. Upgrade your cluster when it's out.
+- After successful validtion it should periodically report that it is runnning and not frozen or crashed. This is a liveness check.
 
 You can read about Kubernetes Readiness & Liveliness probes. Then read below article to understand how this sample is designed & implemented. (Some work is still in progress)
 
@@ -29,7 +29,7 @@ https://kaizenberglabs.wordpress.com/2019/10/28/kubernetes-essentials-readiness-
 - Azure Subsription
 - Resource Group
 - Azure Container Registry instance
-- Azure Kubernetes Service instance
+- Azure Kubernetes Service instance (Kubernets version 1.15, only readiness & liveness probes can be tested)
 - Service Bus Namespace with 2 queues
 - SAS keys for both queues
 - Service Principal with Reader access on Resource Group
