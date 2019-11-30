@@ -74,7 +74,7 @@ namespace Kubernetes.Probes.Core
 
             // Although all tasks will finish by now, background service will not cause the host to terminate.
             // You will have to implement IApplicationLifetime for that which may not make sense if there are multiple IHostedService implemented.
-            // But, since kubernetes liveness probes are enabled, absence of liveness.signal file will cause service to reboot.
+            // But, since kubernetes liveness probes are enabled, absence of alive.signal file will cause service to reboot.
         }
 
         protected virtual async Task SendStartedSignalAsync(CancellationToken token)
